@@ -3,76 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>킹덤 빌더 황금키워드 분석기 | 블로그 SEO 도구</title>
+    <title>킹덤 빌더 황금키워드 분석기 | 전영역 SEO 도구</title>
     <style>
         :root {
             --primary: #1a237e;
             --secondary: #d4af37;
             --bg: #f8fafc;
             --card: #ffffff;
+            --accent: #2e7d32;
         }
         body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: #333; margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 800px; margin: 40px auto; padding: 30px; background: var(--card); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .container { max-width: 900px; margin: 40px auto; padding: 30px; background: var(--card); border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         header { text-align: center; margin-bottom: 30px; }
-        h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 10px; }
-        .input-box { display: flex; gap: 10px; margin-bottom: 20px; }
-        input { flex: 1; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; }
-        button { padding: 15px 25px; border: none; border-radius: 12px; background: var(--primary); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(26,35,126,0.2); }
-        .result-area { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .keyword-list { background: #f1f5f9; padding: 20px; border-radius: 15px; border-top: 4px solid var(--secondary); }
-        .keyword-list h3 { margin-top: 0; color: var(--primary); font-size: 1rem; }
-        .item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+        h1 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
+        .input-box { display: flex; gap: 10px; margin-bottom: 30px; }
+        input { flex: 1; padding: 18px; border: 2px solid #e2e8f0; border-radius: 15px; font-size: 1.1rem; outline: none; }
+        input:focus { border-color: var(--primary); }
+        button { padding: 15px 30px; border: none; border-radius: 15px; background: var(--primary); color: white; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        button:hover { background: #0d1440; transform: translateY(-2px); }
+
+        .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; display: none; }
+        .keyword-card { background: #fff; padding: 20px; border-radius: 18px; border: 1px solid #edf2f7; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .keyword-card h3 { margin-top: 0; padding-bottom: 10px; border-bottom: 2px solid var(--secondary); color: var(--primary); font-size: 1.1rem; }
+        
+        .item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.95rem; }
         .item:last-child { border: none; }
-        .search-links a { font-size: 0.7rem; color: #64748b; text-decoration: none; margin-left: 5px; border: 1px solid #cbd5e1; padding: 2px 5px; border-radius: 4px; }
-        .search-links a:hover { background: var(--primary); color: white; }
-        .ad-space { text-align: center; margin: 30px 0; min-height: 100px; background: #eee; line-height: 100px; color: #999; font-size: 0.8rem; border: 1px dashed #ccc; }
+        .search-links a { font-size: 0.75rem; color: #64748b; text-decoration: none; margin-left: 6px; border: 1px solid #cbd5e1; padding: 3px 7px; border-radius: 6px; font-weight: bold; }
+        .search-links a:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .title-section { margin-top: 40px; padding: 25px; background: #fdfaf0; border-radius: 18px; display: none; }
+        .title-section h3 { color: #856404; margin-top: 0; }
+        .title-item { padding: 12px; background: #fff; margin-bottom: 10px; border-radius: 10px; border-left: 5px solid var(--secondary); font-weight: 500; }
+
+        .ad-space { text-align: center; margin: 30px 0; min-height: 100px; background: #f1f5f9; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px dashed #cbd5e1; color: #94a3b8; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>💎 황금키워드 분석기</h1>
-        <p>검색 유입을 폭발시키는 제목의 지혜</p>
+        <h1>💎 킹덤 빌더 황금키워드 분석기</h1>
+        <p>어떤 키워드든 수익형 제목으로 변신시킵니다</p>
     </header>
 
     <div class="ad-space">애드센스 광고 영역 (상단)</div>
 
     <div class="input-box">
-        <input type="text" id="keywordInput" placeholder="핵심 키워드를 입력하세요 (예: 주식, 다이어트)">
-        <button onclick="analyzeKeyword()">황금키워드 추출</button>
+        <input type="text" id="keywordInput" placeholder="키워드 입력 (예: 삼성전자, 제주도 여행, 운동화)">
+        <button onclick="analyzeAll()">황금키워드 분석</button>
     </div>
 
-    <div id="results" class="result-area" style="display:none;">
-        <div class="keyword-list">
-            <h3>📈 연관 추천 키워드</h3>
-            <div id="relKeywords"></div>
+    <div id="resultGrid" class="result-grid">
+        <div class="keyword-card">
+            <h3>📖 정보/지식형</h3>
+            <div id="infoKeywords"></div>
         </div>
-        <div class="keyword-list">
-            <h3>🔥 제목 조합 아이디어</h3>
-            <div id="titleIdeas"></div>
+        <div class="keyword-card">
+            <h3>🛒 쇼핑/리뷰형</h3>
+            <div id="shopKeywords"></div>
+        </div>
+        <div class="keyword-card">
+            <h3>📊 전문/분석형</h3>
+            <div id="proKeywords"></div>
         </div>
     </div>
 
-    <div class="ad-space" style="margin-top:40px;">쿠팡 파트너스 배너 (블로거 추천템)</div>
+    <div id="titleSection" class="title-section">
+        <h3>🔥 클릭을 부르는 황금 제목 조합</h3>
+        <div id="titleList"></div>
+    </div>
 
-    <footer style="text-align: center; margin-top: 50px; font-size: 0.8rem; color: #94a3b8;">
+    <div class="ad-space" style="margin-top: 40px;">쿠팡 파트너스 배너 영역</div>
+
+    <footer style="text-align: center; margin-top: 50px; font-size: 0.85rem; color: #94a3b8;">
         © 2026 Kingdom Builder. "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
     </footer>
 </div>
 
 <script>
-    function analyzeKeyword() {
+    function analyzeAll() {
         const key = document.getElementById('keywordInput').value.trim();
         if(!key) return alert('키워드를 입력해 주세요!');
 
-        document.getElementById('results').style.display = 'grid';
-        
-        // 1. 연관 키워드 생성 (접두어/접미어 조합)
-        const rels = [key + ' 뜻', key + ' 추천', key + ' 방법', key + ' 후기', '무료 ' + key, '가성비 ' + key, key + ' 순위', key + ' 사용법'];
-        const relDiv = document.getElementById('relKeywords');
-        relDiv.innerHTML = rels.map(k => `
+        document.getElementById('resultGrid').style.display = 'grid';
+        document.getElementById('titleSection').style.display = 'block';
+
+        // 1. 정보/지식형 조합 (뜻, 방법, 이유 등)
+        const info = [key + ' 뜻', key + ' 하는 법', key + ' 장단점', key + ' 주의사항', key + ' 정리'];
+        renderKeywords('infoKeywords', info);
+
+        // 2. 쇼핑/리뷰형 조합 (추천, 가격, 순위 등)
+        const shop = [key + ' 추천', key + ' 가격', key + ' 순위', key + ' 가성비', key + ' 후기'];
+        renderKeywords('shopKeywords', shop);
+
+        // 3. 전문/분석형 조합 (전망, 분석, 관련주, 변곡점 등)
+        const pro = [key + ' 전망', key + ' 분석', key + ' 관련주', key + ' 변곡점', key + ' 실적'];
+        renderKeywords('proKeywords', pro);
+
+        // 4. 범용 황금 제목 조합
+        const titles = [
+            `실패 없는 ${key} 완벽 가이드 (2026 최신판)`,
+            `전문가가 알려주는 ${key}의 숨겨진 비밀 5가지`,
+            `${key} 직접 써보고 분석한 솔직한 장단점`,
+            `지금 바로 확인해야 할 ${key} 핵심 포인트`,
+            `왜 다들 ${key}에 열광할까? 핵심 정리`
+        ];
+        document.getElementById('titleList').innerHTML = titles.map(t => `<div class="title-item">${t}</div>`).join('');
+    }
+
+    function renderKeywords(id, list) {
+        const div = document.getElementById(id);
+        div.innerHTML = list.map(k => `
             <div class="item">
                 <span>${k}</span>
                 <span class="search-links">
@@ -81,23 +122,7 @@
                 </span>
             </div>
         `).join('');
-
-        // 2. 제목 조합 아이디어
-        const titles = [
-            `실패 없는 ${key} 선택 가이드`,
-            `나만 알고 싶은 ${key} 황금 비결`,
-            `${key} 직접 써보고 느낀 솔직한 장단점`,
-            `2026년 필수 ${key} 베스트 10 추천`,
-            `${key}로 인생이 바뀌는 5가지 이유`
-        ];
-        const titleDiv = document.getElementById('titleIdeas');
-        titleDiv.innerHTML = titles.map(t => `
-            <div class="item">
-                <span>${t}</span>
-            </div>
-        `).join('');
     }
 </script>
-
 </body>
 </html>
